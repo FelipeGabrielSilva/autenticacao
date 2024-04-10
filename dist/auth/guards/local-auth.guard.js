@@ -13,9 +13,9 @@ let LocalAuthGuard = class LocalAuthGuard extends (0, passport_1.AuthGuard)('loc
     canActivate(context) {
         return super.canActivate(context);
     }
-    handleRequest(err, user) {
+    handleRequest(err, user, info) {
         if (err || !user) {
-            throw new common_1.UnauthorizedException(err?.message);
+            throw err || new common_1.UnauthorizedException('Não autorizado');
         }
         return user;
     }

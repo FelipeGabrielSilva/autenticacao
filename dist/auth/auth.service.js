@@ -21,30 +21,34 @@ let AuthService = class AuthService {
     }
     async login(email, senha) {
         const user = await this.userService.findByEmail(email);
-        if (user?.senha != senha) {
+        if (user) {
+            const payload = {
+                sub: user.id,
+                email: user.email,
+                senha: user.senha,
+            };
+            const accessToken = await this.jwtService.signAsync(payload);
+            return {
+                access_token: accessToken,
+            };
+        }
+        else {
+            throw new common_1.UnauthorizedException('Usuário não encontrado.');
+        }
+        const isSenhaValid = await bcrypt.compare(senha, user.senha);
+        if (!isSenhaValid) {
             throw new common_1.UnauthorizedException('Senha incorreta.');
         }
-        const payload = {
-            sub: user.id,
-            email: user.email,
-            senha: user.senha,
-        };
-        return {
-            access_token: this.jwtService.sign(payload),
-        };
     }
     async validateUser(email, senha) {
         const user = await this.userService.findByEmail(email);
-        if (user) {
-            const isSenhaValid = await bcrypt.compare(senha, user.senha);
-            if (isSenhaValid) {
-                return {
-                    ...user,
-                    senha: undefined,
-                };
-            }
+        if (user && (await bcrypt.compare(senha, user.senha))) {
+            return {
+                ...user,
+                senha: undefined,
+            };
         }
-        throw new common_1.UnauthorizedException('E-mail ou senha incorretos.');
+        return null;
     }
 };
 exports.AuthService = AuthService;

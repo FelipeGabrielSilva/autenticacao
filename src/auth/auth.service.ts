@@ -15,35 +15,40 @@ export class AuthService {
 
   async login(email: string, senha: string): Promise<UserToken> {
     const user = await this.userService.findByEmail(email);
-    if (user?.senha != senha) {
-      throw new UnauthorizedException('Senha incorreta.');
+
+    if (user) {
+      const payload: UserPayload = {
+        sub: user.id,
+        email: user.email,
+        senha: user.senha,
+      };
+
+      const accessToken = await this.jwtService.signAsync(payload);
+
+      return {
+        access_token: accessToken,
+      };
+    } else {
+      throw new UnauthorizedException('Usuário não encontrado.');
     }
 
-    const payload: UserPayload = {
-      sub: user.id,
-      email: user.email,  
-      senha: user.senha,
-    };
+    const isSenhaValid = await bcrypt.compare(senha, user.senha);
 
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    if (!isSenhaValid) {
+      throw new UnauthorizedException('Senha incorreta.');
+    }
   }
 
   async validateUser(email: string, senha: string): Promise<User> {
     const user = await this.userService.findByEmail(email);
 
-    if (user) {
-      const isSenhaValid = await bcrypt.compare(senha, user.senha);
-
-      if (isSenhaValid) {
-        return {
-          ...user,
-          senha: undefined,
-        };
-      }
+    if (user && (await bcrypt.compare(senha, user.senha))) {
+      return {
+        ...user,
+        senha: undefined,
+      };
     }
 
-    throw new UnauthorizedException('E-mail ou senha incorretos.');
+    return null;
   }
 }

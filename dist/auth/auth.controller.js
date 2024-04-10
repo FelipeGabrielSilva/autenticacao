@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
-const local_auth_guard_1 = require("./guards/local-auth.guard");
 const is_public_decorator_1 = require("./decorators/is-public.decorator");
 let AuthController = class AuthController {
     constructor(authService) {
@@ -28,7 +27,6 @@ let AuthController = class AuthController {
 exports.AuthController = AuthController;
 __decorate([
     (0, is_public_decorator_1.IsPublic)(),
-    (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
     (0, common_1.Post)('login'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Body)()),

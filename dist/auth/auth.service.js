@@ -21,24 +21,21 @@ let AuthService = class AuthService {
     }
     async login(email, senha) {
         const user = await this.userService.findByEmail(email);
-        if (user) {
-            const payload = {
-                sub: user.id,
-                email: user.email,
-                senha: user.senha,
-            };
-            const accessToken = await this.jwtService.signAsync(payload);
-            return {
-                access_token: accessToken,
-            };
-        }
-        else {
+        if (!user) {
             throw new common_1.UnauthorizedException('Usuário não encontrado.');
         }
         const isSenhaValid = await bcrypt.compare(senha, user.senha);
         if (!isSenhaValid) {
             throw new common_1.UnauthorizedException('Senha incorreta.');
         }
+        const payload = {
+            sub: user.id,
+            email: user.email,
+        };
+        const accessToken = await this.jwtService.signAsync(payload);
+        return {
+            access_token: accessToken,
+        };
     }
     async validateUser(email, senha) {
         const user = await this.userService.findByEmail(email);

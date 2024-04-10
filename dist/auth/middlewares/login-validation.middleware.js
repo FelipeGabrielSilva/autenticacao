@@ -15,7 +15,7 @@ let LoginValidationMiddleware = class LoginValidationMiddleware {
         const body = req.body;
         const loginRequestBody = new LoginRequestBody_1.LoginRequestBody();
         loginRequestBody.email = body.email;
-        loginRequestBody.password = body.password;
+        loginRequestBody.senha = body.senha;
         const validations = await (0, class_validator_1.validate)(loginRequestBody);
         if (validations.length) {
             throw new common_1.BadRequestException(validations.reduce((acc, curr) => {

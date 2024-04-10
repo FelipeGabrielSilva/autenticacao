@@ -16,19 +16,7 @@ export class AuthService {
   async login(email: string, senha: string): Promise<UserToken> {
     const user = await this.userService.findByEmail(email);
 
-    if (user) {
-      const payload: UserPayload = {
-        sub: user.id,
-        email: user.email,
-        senha: user.senha,
-      };
-
-      const accessToken = await this.jwtService.signAsync(payload);
-
-      return {
-        access_token: accessToken,
-      };
-    } else {
+    if (!user) {
       throw new UnauthorizedException('Usuário não encontrado.');
     }
 
@@ -37,12 +25,24 @@ export class AuthService {
     if (!isSenhaValid) {
       throw new UnauthorizedException('Senha incorreta.');
     }
+
+    const payload: UserPayload = {
+      sub: user.id,
+      email: user.email,
+    };
+
+    const accessToken = await this.jwtService.signAsync(payload);
+
+    return {
+      access_token: accessToken,
+    };
   }
 
   async validateUser(email: string, senha: string): Promise<User> {
     const user = await this.userService.findByEmail(email);
 
     if (user && (await bcrypt.compare(senha, user.senha))) {
+      // Removido a senha do retorno do usuário para evitar retornar informações sensíveis
       return {
         ...user,
         senha: undefined,

@@ -21,5 +21,5 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], LoginRequestBody.prototype, "password", void 0);
+], LoginRequestBody.prototype, "senha", void 0);
 //# sourceMappingURL=LoginRequestBody.js.map

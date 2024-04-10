@@ -13,7 +13,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @IsPublic()
-@Controller('cadastro')
+@Controller('usuario')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

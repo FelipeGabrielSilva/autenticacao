@@ -23,10 +23,9 @@ export declare class UserService {
         senha: string;
     }[]>;
     findOne(id: number): Promise<{
-        id: number;
         nome: string;
         email: string;
-        senha: string;
+        id: number;
     }>;
     update(id: number, data: UpdateUserDto): Promise<{
         id: number;

@@ -36,6 +36,11 @@ export class UserService {
       where: {
         id: id,
       },
+      select: {
+        id: true,
+        nome: true,
+        email: true,
+      },
     });
   }
 

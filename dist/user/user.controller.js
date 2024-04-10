@@ -76,7 +76,7 @@ __decorate([
 ], UserController.prototype, "remove", null);
 exports.UserController = UserController = __decorate([
     (0, is_public_decorator_1.IsPublic)(),
-    (0, common_1.Controller)('cadastro'),
+    (0, common_1.Controller)('usuario'),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 //# sourceMappingURL=user.controller.js.map

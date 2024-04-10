@@ -39,6 +39,11 @@ let UserService = class UserService {
             where: {
                 id: id,
             },
+            select: {
+                id: true,
+                nome: true,
+                email: true,
+            },
         });
     }
     async update(id, data) {

@@ -17,10 +17,9 @@ export declare class UserController {
         senha: string;
     }[]>;
     findOne(id: string): Promise<{
-        id: number;
         nome: string;
         email: string;
-        senha: string;
+        id: number;
     }>;
     update(id: string, updateUserDto: UpdateUserDto): Promise<{
         id: number;

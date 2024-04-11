@@ -46,6 +46,16 @@ let UserService = class UserService {
             },
         });
     }
+    async comentar(id) {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                id: id,
+            }
+        });
+        if (user) {
+            return { msg: `Como isso pode acontecer ${user.nome}?!` };
+        }
+    }
     async update(id, data) {
         return await this.prisma.user.update({
             where: { id: id },

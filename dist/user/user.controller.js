@@ -25,6 +25,9 @@ let UserController = class UserController {
     create(createUserDto) {
         return this.userService.create(createUserDto);
     }
+    comentar(id) {
+        return this.userService.comentar(parseInt(id, 10));
+    }
     findAll() {
         return this.userService.findAll();
     }
@@ -40,6 +43,7 @@ let UserController = class UserController {
 };
 exports.UserController = UserController;
 __decorate([
+    (0, is_public_decorator_1.IsPublic)(),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -47,12 +51,21 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "create", null);
 __decorate([
+    (0, common_1.Get)('comentar/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "comentar", null);
+__decorate([
+    (0, is_public_decorator_1.IsPublic)(),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "findAll", null);
 __decorate([
+    (0, is_public_decorator_1.IsPublic)(),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -60,6 +73,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "findOne", null);
 __decorate([
+    (0, is_public_decorator_1.IsPublic)(),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -68,6 +82,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "update", null);
 __decorate([
+    (0, is_public_decorator_1.IsPublic)(),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

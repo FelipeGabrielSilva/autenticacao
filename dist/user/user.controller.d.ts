@@ -9,12 +9,17 @@ export declare class UserController {
         nome: string;
         email: string;
         senha: string;
+        roles: import(".prisma/client").$Enums.Role;
+    }>;
+    comentar(id: string): Promise<{
+        msg: string;
     }>;
     findAll(): Promise<{
         id: number;
         nome: string;
         email: string;
         senha: string;
+        roles: import(".prisma/client").$Enums.Role;
     }[]>;
     findOne(id: string): Promise<{
         nome: string;
@@ -26,6 +31,7 @@ export declare class UserController {
         nome: string;
         email: string;
         senha: string;
+        roles: import(".prisma/client").$Enums.Role;
     }>;
     remove(id: string): Promise<string>;
 }

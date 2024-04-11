@@ -9,21 +9,21 @@ export declare class UserService {
         nome: string;
         email: string;
         senha: string;
-        roles: import(".prisma/client").$Enums.Role;
+        roles: string;
     }>;
     findByEmail(email: string): Promise<{
         id: number;
         nome: string;
         email: string;
         senha: string;
-        roles: import(".prisma/client").$Enums.Role;
+        roles: string;
     }>;
     findAll(): Promise<{
         id: number;
         nome: string;
         email: string;
         senha: string;
-        roles: import(".prisma/client").$Enums.Role;
+        roles: string;
     }[]>;
     findOne(id: number): Promise<{
         nome: string;
@@ -38,7 +38,7 @@ export declare class UserService {
         nome: string;
         email: string;
         senha: string;
-        roles: import(".prisma/client").$Enums.Role;
+        roles: string;
     }>;
     remove(id: number): Promise<string>;
 }

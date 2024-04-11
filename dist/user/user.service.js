@@ -21,11 +21,11 @@ let UserService = class UserService {
         const data = {
             ...createUserDto,
             senha: await bcrypt.hash(createUserDto.senha, 10),
+            roles: createUserDto.roles,
         };
         const userCriado = await this.prisma.user.create({
             data,
         });
-        const { senha, ...userSemSenha } = userCriado;
         return userCriado;
     }
     async findByEmail(email) {

@@ -24,6 +24,6 @@ export class CreateUserDto extends User {
   })
   senha: string;
 
-  @IsEnum(Role, { each: true })
-  roles?: Role[];
+  @IsString()
+  roles?: string;
 }

@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUserDto = void 0;
 const class_validator_1 = require("class-validator");
 const user_entity_1 = require("../entities/user.entity");
-const role_enum_1 = require("../../role/role.enum");
 class CreateUserDto extends user_entity_1.User {
 }
 exports.CreateUserDto = CreateUserDto;
@@ -34,7 +33,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "senha", void 0);
 __decorate([
-    (0, class_validator_1.IsEnum)(role_enum_1.Role, { each: true }),
-    __metadata("design:type", Array)
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
 ], CreateUserDto.prototype, "roles", void 0);
 //# sourceMappingURL=create-user.dto.js.map

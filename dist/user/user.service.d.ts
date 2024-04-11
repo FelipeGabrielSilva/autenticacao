@@ -9,21 +9,21 @@ export declare class UserService {
         nome: string;
         email: string;
         senha: string;
-        roles: string;
+        roles: number;
     }>;
     findByEmail(email: string): Promise<{
         id: number;
         nome: string;
         email: string;
         senha: string;
-        roles: string;
+        roles: number;
     }>;
     findAll(): Promise<{
         id: number;
         nome: string;
         email: string;
         senha: string;
-        roles: string;
+        roles: number;
     }[]>;
     findOne(id: number): Promise<{
         nome: string;
@@ -38,7 +38,7 @@ export declare class UserService {
         nome: string;
         email: string;
         senha: string;
-        roles: string;
+        roles: number;
     }>;
     remove(id: number): Promise<string>;
 }

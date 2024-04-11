@@ -9,7 +9,7 @@ export declare class UserController {
         nome: string;
         email: string;
         senha: string;
-        roles: string;
+        roles: number;
     }>;
     comentar(id: string): Promise<{
         msg: string;
@@ -19,7 +19,7 @@ export declare class UserController {
         nome: string;
         email: string;
         senha: string;
-        roles: string;
+        roles: number;
     }[]>;
     findOne(id: string): Promise<{
         nome: string;
@@ -31,7 +31,7 @@ export declare class UserController {
         nome: string;
         email: string;
         senha: string;
-        roles: string;
+        roles: number;
     }>;
     remove(id: string): Promise<string>;
 }

@@ -1,6 +1,7 @@
 import {
   IsEmail,
   IsEnum,
+  IsNumber,
   IsString,
   Matches,
   MaxLength,
@@ -24,6 +25,6 @@ export class CreateUserDto extends User {
   })
   senha: string;
 
-  @IsString()
-  roles?: string;
+  @IsEnum(Role, {each: true})
+  roles: Role;
 }

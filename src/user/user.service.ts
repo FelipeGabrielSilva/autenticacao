@@ -14,7 +14,7 @@ export class UserService {
     const data: Prisma.UserCreateInput = {
       ...createUserDto,
       senha: await bcrypt.hash(createUserDto.senha, 10),
-      roles: createUserDto.roles as string,
+      roles: createUserDto.roles,
     };
 
     const userCriado = await this.prisma.user.create({

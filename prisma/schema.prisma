@@ -12,5 +12,5 @@ model User {
   nome  String
   email String @unique
   senha String
-  roles String
+  roles Int
 }

@@ -1,18 +1,33 @@
-import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common";
-import { Reflector } from "@nestjs/core";
-import { Role } from "./role.enum";
-import { ROLES_KEY } from "./role.decorator";
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { Role } from './role.enum';
+import { ROLES_KEY } from './role.decorator';
+import { JwtService } from '@nestjs/jwt';
+import { UserPayload } from 'src/auth/models/UserPayload';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-    constructor(private reflector: Reflector) { }
+    constructor(
+        private reflector: Reflector,
+        private readonly jwtService: JwtService,
+    ) { }
 
-    canActivate(context: ExecutionContext): boolean {
-        const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [context.getHandler(), context.getClass(),]);
+    async canActivate(context: ExecutionContext): Promise<boolean> {
+        const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
+            context.getHandler(),
+            context.getClass(),
+        ]);
 
-        if (!requiredRoles) return true;
+        if (!requiredRoles || !Array.isArray(requiredRoles)) { return true; }
 
-        const { user } = context.switchToHttp().getRequest();
-        return user.roles && requiredRoles.some((role) => user.roles?.includes(role));
+        const { authorization } = context.switchToHttp().getRequest().headers;
+
+        const loginPayload: UserPayload | undefined = await this.jwtService
+            .verifyAsync(authorization, { secret: process.env.JWT_SECRET })
+            .catch(() => undefined);
+
+        if (!loginPayload) return false;
+
+        return requiredRoles.some((role) => role === loginPayload.typeUser);
     }
 }

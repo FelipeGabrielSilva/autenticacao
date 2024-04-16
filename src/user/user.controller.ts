@@ -16,7 +16,6 @@ import { Roles } from 'src/role/role.decorator';
 import { Role } from 'src/role/role.enum';
 import { RolesGuard } from 'src/role/role.guard';
 
-@IsPublic()
 @Controller('usuario')
 export class UserController {
   constructor(private readonly userService: UserService) { }
@@ -26,7 +25,6 @@ export class UserController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
-
 
   @Get('comentar/:id')
   @Roles(Role.Admin)

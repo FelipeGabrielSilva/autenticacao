@@ -35,6 +35,6 @@ __decorate([
 ], CreateUserDto.prototype, "senha", void 0);
 __decorate([
     (0, class_validator_1.IsEnum)(role_enum_1.Role, { each: true }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], CreateUserDto.prototype, "roles", void 0);
 //# sourceMappingURL=create-user.dto.js.map

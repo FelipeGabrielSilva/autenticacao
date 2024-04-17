@@ -8,7 +8,6 @@ import {
   MinLength,
 } from 'class-validator';
 import { User } from '../entities/user.entity';
-import { Role } from 'src/role/role.enum';
 
 export class CreateUserDto extends User {
   @IsString()
@@ -24,7 +23,4 @@ export class CreateUserDto extends User {
     message: 'senha muito fraca',
   })
   senha: string;
-
-  @IsEnum(Role, {each: true})
-  roles: Role;
 }

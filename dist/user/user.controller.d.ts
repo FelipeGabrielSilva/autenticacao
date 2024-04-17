@@ -9,7 +9,6 @@ export declare class UserController {
         nome: string;
         email: string;
         senha: string;
-        roles: string;
     }>;
     comentar(id: string): Promise<{
         msg: string;
@@ -19,19 +18,17 @@ export declare class UserController {
         nome: string;
         email: string;
         senha: string;
-        roles: string;
     }[]>;
     findOne(id: string): Promise<{
+        id: number;
         nome: string;
         email: string;
-        id: number;
     }>;
     update(id: string, updateUserDto: UpdateUserDto): Promise<{
         id: number;
         nome: string;
         email: string;
         senha: string;
-        roles: string;
     }>;
     remove(id: string): Promise<string>;
 }

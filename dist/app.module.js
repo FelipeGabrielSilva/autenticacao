@@ -16,7 +16,6 @@ const jwt_auth_guard_1 = require("./auth/guards/jwt-auth.guard");
 const prisma_module_1 = require("./prisma/prisma.module");
 const user_module_1 = require("./user/user.module");
 const prisma_service_1 = require("./prisma/prisma.service");
-const role_guard_1 = require("./role/role.guard");
 const jwt_1 = require("@nestjs/jwt");
 let AppModule = class AppModule {
 };
@@ -31,10 +30,7 @@ exports.AppModule = AppModule = __decorate([
             {
                 provide: core_1.APP_GUARD,
                 useClass: jwt_auth_guard_1.JwtAuthGuard,
-            }, {
-                provide: core_1.APP_GUARD,
-                useClass: role_guard_1.RolesGuard,
-            }
+            },
         ],
     })
 ], AppModule);

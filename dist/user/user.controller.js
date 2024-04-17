@@ -18,9 +18,6 @@ const user_service_1 = require("./user.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 const is_public_decorator_1 = require("../auth/decorators/is-public.decorator");
-const role_decorator_1 = require("../role/role.decorator");
-const role_enum_1 = require("../role/role.enum");
-const role_guard_1 = require("../role/role.guard");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -55,8 +52,6 @@ __decorate([
 ], UserController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)('comentar/:id'),
-    (0, role_decorator_1.Roles)(role_enum_1.Role.Admin),
-    (0, common_1.UseGuards)(role_guard_1.RolesGuard),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

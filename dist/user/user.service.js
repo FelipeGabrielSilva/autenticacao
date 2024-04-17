@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
 const bcrypt = require("bcrypt");
+const prisma_service_1 = require("../prisma/prisma.service");
 let UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
@@ -21,7 +21,6 @@ let UserService = class UserService {
         const data = {
             ...createUserDto,
             senha: await bcrypt.hash(createUserDto.senha, 10),
-            roles: createUserDto.roles,
         };
         const userCriado = await this.prisma.user.create({
             data,

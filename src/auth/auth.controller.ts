@@ -18,6 +18,6 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(@Body() loginInDto: Record<string, any>) {
-    return this.authService.login(loginInDto.email, loginInDto.senha);
+    return this.authService.login(loginInDto.email, loginInDto.password);
   }
 }

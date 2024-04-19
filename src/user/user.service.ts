@@ -12,7 +12,7 @@ export class UserService {
   async create(createUserDto: CreateUserDto) {
     const data: Prisma.UserCreateInput = {
       ...createUserDto,
-      senha: await bcrypt.hash(createUserDto.senha, 10),
+      password: await bcrypt.hash(createUserDto.password, 10),
     };
 
     const userCriado = await this.prisma.user.create({
@@ -37,7 +37,7 @@ export class UserService {
       },
       select: {
         id: true,
-        nome: true,
+        name: true,
         email: true,
       },
     });

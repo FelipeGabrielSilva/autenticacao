@@ -5,8 +5,8 @@ export class CreatePostDto {
     id: number;
 
     @IsString()
-    titulo: string;
+    tittle: string;
 
     @IsString()
-    conteudo: string;
+    content: string;
 }

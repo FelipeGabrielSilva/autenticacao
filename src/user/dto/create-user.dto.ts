@@ -11,7 +11,7 @@ import { User } from '../entities/user.entity';
 
 export class CreateUserDto extends User {
   @IsString()
-  nome: string;
+  name: string;
 
   @IsEmail()
   email: string;
@@ -20,7 +20,7 @@ export class CreateUserDto extends User {
   @MinLength(4)
   @MaxLength(20)
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message: 'senha muito fraca',
+    message: 'password muito fraca',
   })
-  senha: string;
+  password: string;
 }

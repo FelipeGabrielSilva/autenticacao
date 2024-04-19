@@ -9,8 +9,16 @@ datasource db {
 
 model User {
   id    Int    @id @default(autoincrement())
-  nome  String
+  name  String
   email String @unique
-  senha String
-  roles String
+  password String
+  post  Post[]
+}
+
+model Post {
+  id       Int    @id @default(autoincrement())
+  titulo   String
+  conteudo String
+  autor    User   @relation(fields: [autorId], references: [id])
+  autorId  Int
 }

@@ -5,5 +5,5 @@ export class LoginRequestBody {
   email: string;
 
   @IsString()
-  senha: string;
+  password: string;
 }

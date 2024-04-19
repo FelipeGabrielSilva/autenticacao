@@ -13,17 +13,17 @@ export class AuthService {
     private readonly userService: UserService,
   ) { }
 
-  async login(email: string, senha: string): Promise<UserToken> {
+  async login(email: string, password: string): Promise<UserToken> {
     const user = await this.userService.findByEmail(email);
 
     if (!user) {
       throw new UnauthorizedException('Usuário não encontrado.');
     }
 
-    const isSenhaValid = await bcrypt.compare(senha, user.senha);
+    const ispasswordValid = await bcrypt.compare(password, user.password);
 
-    if (!isSenhaValid) {
-      throw new UnauthorizedException('Senha incorreta.');
+    if (!ispasswordValid) {
+      throw new UnauthorizedException('password incorreta.');
     }
 
     const payload: UserPayload = {
@@ -38,14 +38,14 @@ export class AuthService {
     };
   }
 
-  async validateUser(email: string, senha: string): Promise<User> {
+  async validateUser(email: string, password: string): Promise<User> {
     const user = await this.userService.findByEmail(email);
 
-    if (user && (await bcrypt.compare(senha, user.senha))) {
-      // Removido a senha do retorno do usuário para evitar retornar informações sensíveis
+    if (user && (await bcrypt.compare(password, user.password))) {
+      // Removido a password do retorno do usuário para evitar retornar informações sensíveis
       return {
         ...user,
-        senha: undefined,
+        password: undefined,
       };
     }
 

@@ -7,23 +7,44 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class PostService {
   constructor(private prisma: PrismaService) { }
 
-  create(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+  async create(userId: number, createPostDto: CreatePostDto) {
+    const newPost = await this.prisma.post.create({
+      data: {
+        ...createPostDto,
+        author: { connect: { id: userId } }
+      }
+    })
+
+    return newPost;
   }
 
-  findAll() {
-    return `This action returns all post`;
+  async findAll() {
+    return await this.prisma.post.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  async findOne(id: number) {
+    return await this.prisma.post.findUnique({
+      where: { id: id },
+    });
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  async update(id: number, updatePostDto: UpdatePostDto) {
+
+    const updatedPost = await this.prisma.post.update({
+      where: {
+        id: id,
+      },
+      data: updatePostDto,
+    })
+
+    return updatePostDto;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  async remove(id: number) {
+    return await this.prisma.post.delete({
+      where: {
+        id: id,
+      }
+    });
   }
 }

@@ -1,5 +1,6 @@
 export class Post {
-    id?: number;
+    createdAt: Date;
+    updatedAt: Date;
     tittle: string;
     content: string;
 }

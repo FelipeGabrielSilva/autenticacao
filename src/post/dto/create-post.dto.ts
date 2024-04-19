@@ -1,9 +1,6 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsDate, IsNumber, IsString } from "class-validator";
 
 export class CreatePostDto {
-    @IsNumber()
-    id: number;
-
     @IsString()
     tittle: string;
 

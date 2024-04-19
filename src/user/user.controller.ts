@@ -15,18 +15,13 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @IsPublic()
-@Controller()
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
-  }
-
-  @Post()
-  login() {
-    return this.login()
   }
 
   @Get()

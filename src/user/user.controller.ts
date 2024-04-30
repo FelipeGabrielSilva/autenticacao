@@ -5,14 +5,12 @@ import {
   Get,
   Param,
   Patch,
-  Post,
-  Query,
-  UseGuards,
+  Post
 } from '@nestjs/common';
-import { UserService } from './user.service';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { IsPublic } from 'src/auth/decorators/is-public.decorator';
+import { UserService } from './user.service';
 
 @IsPublic()
 @Controller('user')

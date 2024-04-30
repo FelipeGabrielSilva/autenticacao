@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { User } from '../user/entities/user.entity';
@@ -23,12 +23,13 @@ export class AuthService {
     const ispasswordValid = await bcrypt.compare(password, user.password);
 
     if (!ispasswordValid) {
-      throw new UnauthorizedException('password incorreta.');
+      throw new UnauthorizedException('Senha incorreta.');
     }
 
     const payload: UserPayload = {
       sub: user.id,
       email: user.email,
+      isAdmin: user.isAdmin,
     };
 
     const accessToken = await this.jwtService.signAsync(payload);
@@ -51,4 +52,5 @@ export class AuthService {
 
     return null;
   }
+
 }

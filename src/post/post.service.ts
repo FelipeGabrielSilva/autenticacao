@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PostService {
-  constructor(private prisma: PrismaService) { }
+  constructor(
+    private prisma: PrismaService,
+  ) { }
+
 
   async create(userId: number, createPostDto: CreatePostDto) {
     const newPost = await this.prisma.post.create({
@@ -13,7 +16,7 @@ export class PostService {
         ...createPostDto,
         author: { connect: { id: userId } }
       }
-    })
+    });
 
     return newPost;
   }
@@ -28,23 +31,20 @@ export class PostService {
     });
   }
 
-  async update(id: number, updatePostDto: UpdatePostDto) {
-
+  async update(userId: number, id: number, updatePostDto: UpdatePostDto) {
     const updatedPost = await this.prisma.post.update({
-      where: {
-        id: id,
-      },
+      where: { id },
       data: updatePostDto,
-    })
+    });
 
-    return updatePostDto;
+    return updatedPost;
   }
 
-  async remove(id: number) {
-    return await this.prisma.post.delete({
-      where: {
-        id: id,
-      }
+  async remove(userId: number, id: number) {
+    await this.prisma.post.delete({
+      where: { id },
     });
+
+    return `Postagem ${id} removida`;
   }
 }

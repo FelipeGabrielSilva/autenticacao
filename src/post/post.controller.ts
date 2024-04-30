@@ -9,8 +9,8 @@ export class PostController {
 
   @Post()
   async create(@Request() req, @Body() createPostDto: CreatePostDto) {
-    const userId = req.user.id;
-    const newPost = await this.postService.create(userId, createPostDto);
+    const user = req.user.id;
+    const newPost = await this.postService.create(user, createPostDto);
     return newPost;
   }
 
@@ -26,12 +26,14 @@ export class PostController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postService.update(+id, updatePostDto);
+  update(@Request() req, @Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
+    const user = req.user.id;
+    return this.postService.update(user, +id, updatePostDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postService.remove(+id);
+  remove(@Request() req, @Param('id') id: string) {
+    const user = req.user;
+    return this.postService.remove(user, +id);
   }
 }

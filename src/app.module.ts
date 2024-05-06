@@ -9,9 +9,10 @@ import { PostModule } from './post/post.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrismaService } from './prisma/prisma.service';
 import { UserModule } from './user/user.module';
+import { CaslModule } from './casl/casl.module';
 
 @Module({
-  imports: [PrismaModule, UserModule, AuthModule, JwtModule, PostModule,],
+  imports: [PrismaModule, UserModule, AuthModule, JwtModule, PostModule, CaslModule,],
   controllers: [AppController],
   providers: [
     AppService,

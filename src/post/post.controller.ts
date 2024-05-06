@@ -33,7 +33,7 @@ export class PostController {
 
   @Delete(':id')
   remove(@Request() req, @Param('id') id: string) {
-    const user = req.user;
-    return this.postService.remove(user, +id);
+    const userId = req.user.id;
+    return this.postService.remove(userId, +id);
   }
 }

@@ -19,7 +19,7 @@ export class PostService {
 
     const ability = this.caslAbilityFactory.createForUser(user);
     if (!ability.can(Action.Create, 'Post')) {
-      throw new Error('Você não tem permissão para criar uma postagem');
+      throw new Error('Você não tem permissão para criar um post');
     }
 
     const newPost = await this.prisma.post.create({
@@ -47,7 +47,7 @@ export class PostService {
 
     const ability = this.caslAbilityFactory.createForUser(user);
     if (!ability.can(Action.Update, 'Post')) {
-      throw new Error('Você não tem permissão para atualizar esta postagem');
+      throw new Error('Você não tem permissão para atualizar o post');
     }
 
     const updatedPost = await this.prisma.post.update({
@@ -64,14 +64,14 @@ export class PostService {
     const ability = this.caslAbilityFactory.createForUser(user);
 
     if (!ability.can(Action.Delete, 'Post')) {
-      throw new Error('Você não tem permissão para excluir esta postagem');
+      throw new Error('Você não tem permissão para excluir o post');
     } else {
       
       await this.prisma.post.delete({
         where: { id },
       });
 
-      return `Postagem ${id} removida`;
+      return `post ${id} removida`;
     }
   }
 }
